@@ -1,4 +1,11 @@
 describe('Orange HRM Tests', () => {
+   const selectorslist = {
+     usarnameField: "[name='username']",
+     passwordField: "[name='password']",
+     loginButton: "'.oxd-button'",
+     tittleTopBar: "'.oxd-topbar-header-title'",
+     wrongCredendialAlert: "'.oxd-alert'",
+   }
   it('login - sucess', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
     cy.get("[name='username']").type('Admin')
