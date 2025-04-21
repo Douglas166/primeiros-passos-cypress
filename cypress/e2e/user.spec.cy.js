@@ -15,8 +15,11 @@ describe('Orange HRM Tests', () => {
      dateCloseButton: ".--close",
      middleNameField: ".orangehrm-middlename",
      submitButton: "[type='submit']",
-     closeButton: ".oxd-toast-close"
-   }
+     closeButton: ".oxd-toast-close",
+     selectButtonGeneric: "[clear='false']",
+     nacionalityButton: ":nth-child(4) > span",
+     maritalStatusButton: ".oxd-select-dropdown > :nth-child(3)"
+     }
 
   it.only('User Info Update - Sucess', () => {
     cy.visit('/auth/login')
@@ -33,11 +36,16 @@ describe('Orange HRM Tests', () => {
     cy.get(selectorslist.genericField).eq(6).clear().type('DriverTest')
     cy.get(selectorslist.dateGenericField).eq(0).clear().type('2030-05-05')
     cy.get(selectorslist.dateCloseButton).click()
+    cy.get(selectorslist.selectButtonGeneric).eq(0).click()
+    cy.get(selectorslist.nacionalityButton).click()
+    cy.get(selectorslist.selectButtonGeneric).eq(1).click()
+    cy.get(selectorslist.maritalStatusButton).click()
     cy.get(selectorslist.submitButton).eq(0).click()
     cy.get('body').should('contain', "Successfully Updated")
     cy.get(selectorslist.closeButton)
 
-})
+
+})  
 
 it('login - fail', () => {
   cy.visit('/auth/login')
