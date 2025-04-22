@@ -12,7 +12,7 @@ describe('Orange HRM Tests', () => {
    const selectorslist = {}
  
 
- it.only('User Info Update - Sucess', () => {
+ it.only('User Info Update - Success', () => {
     loginPage.loginWithUser(userData.userSuccess.username, userData.userSuccess.password)
     dashboardPage.checkDashboard()
     MenuPage.menuPage()
