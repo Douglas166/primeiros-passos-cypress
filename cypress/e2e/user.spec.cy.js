@@ -1,47 +1,23 @@
 import userData from '../fixtures/userdata.json'
-import LoginPage from '../pages/loginPage.js'
-
+import LoginPage from '../pages/loginPage'
+import dashBoardPage from '../pages/dashboardPage' 
+import menuPage from '../pages/menuPage'
+import MyinfoPage from '../pages/myinfoPage'
+const MenuPage = new menuPage()
 const loginPage = new LoginPage()
+const dashboardPage = new dashBoardPage()
+const myinfoPage = new MyinfoPage()
 
 describe('Orange HRM Tests', () => {
-   const selectorslist = {
-     usernameField: "[name='username']",
-     passwordField: "[name='password']",
-     loginButton: "button",
-     tittleTopBar: "header",
-     wrongCredendialAlert: "body",
-     myInfo: "[href='/web/index.php/pim/viewMyDetails']",
-     firstNameField: ".orangehrm-firstname",
-     lastNameField: ".orangehrm-lastname",
-     genericField: ".oxd-input",
-     dateGenericField: "[placeholder='yyyy-dd-mm']",
-     dateCloseButton: ".--close",
-     middleNameField: ".orangehrm-middlename",
-     submitButton: "[type='submit']",
-     closeButton: ".oxd-toast-close",
-     selectButtonGeneric: "[clear='false']",
-     nacionalityButton: ":nth-child(4) > span",
-     maritalStatusButton: ".oxd-select-dropdown > :nth-child(3)",
-     genderButton: ".oxd-radio-wrapper"
-     }
+   const selectorslist = {}
+ 
 
-  it.only('User Info Update - Sucess', () => {
-   loginPage.loginWithUser(userData.userSuccess.username, userData.userSuccess.password)
-   cy.get(selectorslist.tittleTopBar).should('be.visible')
-   cy.get(selectorslist.myInfo).click()
-   cy.get(selectorslist.firstNameField).clear().type('firstname')
-   cy.get(selectorslist.middleNameField).clear().type('middlename') 
-   cy.get(selectorslist.lastNameField).clear().type('lastname')
-   cy.get(selectorslist.selectButtonGeneric).eq(0).click()
-   cy.get(selectorslist.nacionalityButton).click() 
-   cy.get(selectorslist.selectButtonGeneric).eq(1).click()
-   cy.get(selectorslist.maritalStatusButton).click()
-   cy.get(selectorslist.dateGenericField).eq(0).clear().type('2003-10-01')
-   cy.get(selectorslist.dateCloseButton).click()
-   cy.get(selectorslist.genderButton).eq(0).click()
-   cy.get(selectorslist.submitButton).eq(0).click()
-   cy.get(selectorslist.closeButton)
-})  
+ it.only('User Info Update - Sucess', () => {
+    loginPage.loginWithUser(userData.userSuccess.username, userData.userSuccess.password)
+    dashboardPage.checkDashboard()
+    MenuPage.menuPage()
+    myinfoPage.changeUserInfo()
+ })  
 
 it('login - fail', () => {
   cy.visit('/auth/login')
