@@ -1,3 +1,7 @@
+const Chance = require('chance')
+const chance = new Chance()
+
+
 class MyinfoPage {
     selectors = {
         myInfo: "[href='/web/index.php/pim/viewMyDetails']",
@@ -17,9 +21,9 @@ class MyinfoPage {
     }
 
       changeUserInfo() {
-        cy.get(this.selectors.firstNameField).should('exist').clear().type('firstname')
-        cy.get(this.selectors.middleNameField).clear().type('middlename') 
-        cy.get(this.selectors.lastNameField).clear().type('lastname')
+        cy.get(this.selectors.firstNameField).clear().type(chance.first())
+        cy.get(this.selectors.middleNameField).clear().type(chance.last()) 
+        cy.get(this.selectors.lastNameField).clear().type(chance.last())
         cy.get(this.selectors.selectButtonGeneric).eq(0).click()
         cy.get(this.selectors.nacionalityButton).click() 
         cy.get(this.selectors.selectButtonGeneric).eq(1).click()

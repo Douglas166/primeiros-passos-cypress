@@ -16,8 +16,18 @@ class LoginPage {
       cy.get(this.selectors.usernameField).type(username);
       cy.get(this.selectors.passwordField).type(password);
       cy.get(this.selectors.loginButton).click();
-      cy.get(this.selectors.wrongCredendialAlert).should('not.contain', 'Invalid credentials');
-  }
+    }
+  checkAcessInvalid(username, password) {
+    cy.visit('/auth/login');
+    cy.get(this.selectors.usernameField).type(username);
+    cy.get(this.selectors.passwordField).type(password);
+    cy.get(this.selectors.loginButton).click();
+    cy.get(this.selectors.wrongCredendialAlert);
+
+   }
+
+
+
 }
 
 export default LoginPage;
